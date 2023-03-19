@@ -1,4 +1,3 @@
-import { User } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
 import { CreateUserDto } from "../../domain/user/dtos/createUser.dto";
 import IUserRepository from "../../domain/user/repositories/IUserRepository";
@@ -9,7 +8,7 @@ export class CreateUserUseCase {
     @inject('UserRepository') private userRepository: IUserRepository,
   ) {}
 
-  async execute(user: CreateUserDto): Promise<User> {
+  async execute(user: CreateUserDto) {
     const createdUser = await this.userRepository.create(user);
     return createdUser
   }
