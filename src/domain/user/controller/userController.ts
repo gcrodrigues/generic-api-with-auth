@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { CreateUserUseCase } from '../useCases/createUser.usecase';
-import { DeactivateUserUseCase } from '../useCases/deactivateUser.usecase';
+import { CreateUserService } from '../services/createUser';
+import { DeactivateUserService } from '../services/deactivateUser';
 
 export class UserController {
   async createUser(req: Request, res: Response): Promise<Response> {
     const { name, email, password } = req.body;
-    const createUser = container.resolve(CreateUserUseCase);
+    const createUser = container.resolve(CreateUserService);
     try {
       const user = await createUser.execute({ name, email, password }); 
       return res.status(200).json(user)
@@ -18,7 +18,7 @@ export class UserController {
 
   async deactivateUser(req: Request, res: Response): Promise<Response> {
     const { id } = req.body;
-    const deactivateUser = container.resolve(DeactivateUserUseCase);
+    const deactivateUser = container.resolve(DeactivateUserService);
     try {
       const deactivatedUser = await deactivateUser.execute(id); 
       return res.status(200).json({id: deactivatedUser.id})
