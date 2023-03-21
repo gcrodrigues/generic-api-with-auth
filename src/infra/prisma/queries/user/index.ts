@@ -27,4 +27,9 @@ export default class PrismaUserQueries implements IUserRepository {
     const user = await this.prisma.user.findUnique({ where: { email: email }})
     return user
   }
+
+  async findById(id: string) {
+    const user = await this.prisma.user.findUnique({ where: { id: id }})
+    return user
+  }
 }
