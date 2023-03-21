@@ -1,10 +1,11 @@
 import { inject, injectable } from "tsyringe";
 import { CreateUserDto } from "../../domain/user/dtos/createUser.dto";
 import IUserRepository from "../../domain/user/repositories/IUserRepository";
+import { ICreateUserUseCase } from "../../domain/user/useCases/createUser.usecase";
 import AppError from "../../infra/errors/AppError";
 
 @injectable()
-export class CreateUserUseCase {
+export class CreateUserUseCase implements ICreateUserUseCase {
   constructor(
     @inject('UserRepository') private userRepository: IUserRepository,
   ) {}
