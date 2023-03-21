@@ -1,12 +1,14 @@
 import { inject, injectable } from "tsyringe";
 import { CreateUserDto } from "../dtos/createUser.dto";
-import IUserRepository from "../repositories/userRepository";
 import AppError from "../../../infra/errors/AppError";
+import IUserRepository from "../repositories/userRepository";
+import IHashProvider from "../providers/hashProvider/models/IHashProvider";
 
 @injectable()
 export class CreateUserService {
   constructor(
     @inject('UserRepository') private userRepository: IUserRepository,
+    @inject('HashProvider') private hashProvider: IHashProvider,
   ) {}
 
   async execute(user: CreateUserDto) {
@@ -16,7 +18,10 @@ export class CreateUserService {
       throw new AppError("User already exists");
     }
 
-    const createdUser = await this.userRepository.create(user);
+    const hashedPassword = await this.hashProvider.generateHash(user.password) 
+
+    const createdUser = await this.userRepository.create({...user, password: hashedPassword});
+
     return createdUser
   }
 }

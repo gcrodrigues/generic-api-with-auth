@@ -9,6 +9,9 @@ export class UserController {
     const { name, email, password } = req.body;
     const createUser = container.resolve(CreateUserService);
     const user = await createUser.execute({ name, email, password }); 
+    
+    // @ts-expect-error deleting user password
+    delete user.password;
     return res.status(200).json(user)
   }
 
