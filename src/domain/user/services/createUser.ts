@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { CreateUserDto } from "../dtos/createUser.dto";
-import IUserRepository from "../repositories/IUserRepository";
+import IUserRepository from "../repositories/userRepository";
 import AppError from "../../../infra/errors/AppError";
 
 @injectable()
