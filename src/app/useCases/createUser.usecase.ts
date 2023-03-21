@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import { CreateUserDto } from "../../domain/user/dtos/createUser.dto";
 import IUserRepository from "../../domain/user/repositories/IUserRepository";
+import AppError from "../../infra/errors/AppError";
 
 @injectable()
 export class CreateUserUseCase {
@@ -12,7 +13,7 @@ export class CreateUserUseCase {
     const userAlreadyExists = await this.userRepository.findByEmail(user.email)
 
     if(userAlreadyExists) {
-      throw new Error("User already exists");
+      throw new AppError("User already exists");
     }
 
     const createdUser = await this.userRepository.create(user);
