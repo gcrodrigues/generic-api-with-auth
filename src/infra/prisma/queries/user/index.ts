@@ -22,4 +22,9 @@ export default class PrismaUserQueries implements IUserRepository {
     const deleteUser = await this.prisma.user.delete({ where: { id: id} })
     return deleteUser
   }
+
+  async findByEmail(email: string) {
+    const user = await this.prisma.user.findUnique({ where: { email: email }})
+    return user
+  }
 }
