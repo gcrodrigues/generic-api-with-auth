@@ -1,4 +1,4 @@
-import '../domain/user/providers'
+import '../domain/auth/providers'
 import { PrismaClient } from '@prisma/client';
 import { container } from 'tsyringe';
 

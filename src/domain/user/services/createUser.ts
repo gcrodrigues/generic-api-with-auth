@@ -2,7 +2,7 @@ import { inject, injectable } from "tsyringe";
 import { CreateUserDto } from "../dtos/createUser.dto";
 import AppError from "../../../infra/errors/AppError";
 import IUserRepository from "../repositories/userRepository";
-import IHashProvider from "../providers/hashProvider/models/IHashProvider";
+import IHashProvider from "../../auth/providers/hashProvider/models/IHashProvider";
 
 @injectable()
 export class CreateUserService {
