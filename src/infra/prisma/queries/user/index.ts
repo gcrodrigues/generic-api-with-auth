@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 import { CreateUserDto } from '../../../../domain/user/dtos/createUser.dto';
+import { UpdateUserDto } from '../../../../domain/user/dtos/updateUser.dto';
 import IUserRepository from '../../../../domain/user/repositories/userRepository';
 
 @injectable()
@@ -31,5 +32,17 @@ export default class PrismaUserQueries implements IUserRepository {
   async findById(id: string) {
     const user = await this.prisma.user.findUnique({ where: { id: id }})
     return user
+  }
+
+  async update(user: UpdateUserDto) {
+    const updatedUser = await this.prisma.user.update({ 
+      where: { id: user.id }, 
+      data: {
+        name: user.name,
+        email: user.email
+      }
+    })
+    
+    return updatedUser
   }
 }

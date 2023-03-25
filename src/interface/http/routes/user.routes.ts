@@ -5,7 +5,8 @@ const usersRouter = Router();
 
 const userController = new UserController();
 
-usersRouter.post('/create', userController.create);
 usersRouter.delete('/deactivate', userController.deactivate);
+usersRouter.post('/', userController.create);
+usersRouter.put('/', userController.update);
 
 export default usersRouter ;
