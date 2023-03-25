@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { CreateUserService } from '../services/createUser';
-import { DeactivateUserService } from '../services/deactivateUser';
-import { UpdateUserService } from '../services/updateUser';
+import { CreateUserService } from '../../../services/createUser';
+import { DeactivateUserService } from '../../../services/deactivateUser';
+import { ShowUserService } from '../../../services/shoowUser';
+import { UpdateUserService } from '../../../services/updateUser';
 
 export class UserController {
   async create(req: Request, res: Response): Promise<Response> {
@@ -23,13 +24,4 @@ export class UserController {
     return res.status(200).json({id: deactivatedUser.id})
   }
 
-  async update(req: Request, res: Response): Promise<Response> {
-    const { id, email, name } = req.body;
-    const updateUser = container.resolve(UpdateUserService);
-    const updatedUser = await updateUser.execute({id, name, email}); 
-    
-    // @ts-expect-error deleting user password
-    delete updatedUser.password;
-    return res.status(200).json(updatedUser)
-  }
 }
