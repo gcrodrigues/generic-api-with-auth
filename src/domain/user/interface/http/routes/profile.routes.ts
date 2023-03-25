@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { ProfileController } from '../controllers/profileController';
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import ensureAuthenticated from '../../../../auth/interface/http/middlewares/ensureAuthenticated';
 
 const profileRouter = Router();
 
