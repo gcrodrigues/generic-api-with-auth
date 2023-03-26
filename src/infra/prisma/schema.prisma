@@ -19,3 +19,11 @@ model User {
   updatedAt DateTime @default(now()) @updatedAt
 }
 
+model UserToken {
+  id    String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  token String @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
