@@ -1,4 +1,5 @@
 import { User } from "@prisma/client";
+import { ChangePasswordDto } from "../dtos/changePassword.dto";
 import { CreateUserDto } from "../dtos/createUser.dto";
 import { UpdateUserDto } from "../dtos/updateUser.dto";
 
@@ -8,4 +9,5 @@ export default interface IUserRepository {
   findByEmail(email: string): Promise<User | null>
   findById(id: string): Promise<User | null>
   update(user: UpdateUserDto): Promise<User>
+  updatePassword(user: ChangePasswordDto): Promise<User>
 }
